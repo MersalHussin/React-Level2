@@ -4,16 +4,24 @@ import viteLogo from '/vite.svg'
 import './App.css'
 
 function App() {
-  let name = "Mersal"
-  const changeName = () => {
-    console.log("I'm Mersal")
-    name = "Mohamed"  
+  const [name , setName] = useState("Mersal") 
+  const [age , setAge] = useState(20) 
+  const [count , setCount] = useState(0) 
+  
+  const counter = () => {
+    setCount(count+1);
   }
-
   return (
     <>
       <h1>Hello {name}</h1>
-      <button onClick={changeName}>Click Me</button>
+      <button onClick={() => setName("Ahmed")}>Click Me</button>
+      <h1>My Age Is {age}</h1>
+      <button onClick={() => setAge(21)}>Click Me</button>
+      <br />
+      <br />
+      <br />
+      <br />
+      <button onClick={counter}>Count Is {count}</button>
     </>
   )
 }
