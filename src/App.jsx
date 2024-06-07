@@ -6,17 +6,27 @@ import './App.css'
 function App() {
   const [name , setName] = useState("Mersal") 
   const [age , setAge] = useState(20) 
-  const [count , setCount] = useState(0) 
+  const [count , setCount] = useState(0)
   
+  const nameChange = () => {
+  if (name == "Mersal" ){
+      setName("Hussin")
+  }else{
+    setName("Mersal")
+  }
+}
+
+
+
   const counter = () => {
     setCount(count+1);
   }
   return (
     <>
       <h1>Hello {name}</h1>
-      <button onClick={() => setName("Ahmed")}>Click Me</button>
+      <button onClick={nameChange}>Click Me</button>
       <h1>My Age Is {age}</h1>
-      <button onClick={() => setAge(21)}>Click Me</button>
+      <button onClick={() => {setAge(21)}}>Click Me</button>
       <br />
       <br />
       <br />
