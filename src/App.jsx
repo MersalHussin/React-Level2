@@ -22,19 +22,10 @@ const reducer = (state, action) => {
     case "COUNTER":
       return { ...state, startCount: action.newValue };
     case "TOGGLE":
-      return { ...state, theme: state.theme == "light" ? "dark" : "light" };
+      return { ...state, theme: action.newValue };
     case "TOGGLE_N":
       return { ...state, mood: action.newValue};
-    case "TOGGLE_DARK":
-      return { ...state, mood: action.newValue};
-    case "TOGGLE_PINK":
-      return { ...state, mood: action.newValue};
-    case "TOGGLE_GREEN":
-      return { ...state, mood: action.newValue};
-    case "TOGGLE_GREEN":
-      return { ...state, mood: action.newValue};
-    case "TOGGLE_GRAY":
-      return { ...state, mood: action.newValue};
+
 
     default:
       return state;
@@ -45,25 +36,25 @@ function App() {
   const [allData, dispatch] = useReducer(reducer, initialData);
 
   return (
-    <div className={`App ${allData.mood}`}>
+    <div className={`App ${allData.theme}`}>
       <button onClick={()=>{
-        dispatch({ type: "TOGGLE", newValue: "dark" });
+        dispatch({ type: "TOGGLE", newValue: allData.theme == "" ? "dark" : "" });
       }}>Toggle Menu</button>
       <div className='buttons'>
         <button  onClick={() =>{
           dispatch({ type: "TOGGLE_N", newValue: "" })
         }}>Light</button>
         <button onClick={() => {
-          dispatch({ type: "TOGGLE_DARK", newValue: "dark" })
+          dispatch({ type: "TOGGLE_N", newValue: "dark" })
         }}>Dark</button>
         <button onClick={() => {
-          dispatch({ type: "TOGGLE_PINK", newValue: "pink" })
+          dispatch({ type: "TOGGLE_N", newValue: "pink" })
         }}>Pink</button>
         <button onClick={() => {
-          dispatch({ type: "TOGGLE_GREEN", newValue: "green" })
+          dispatch({ type: "TOGGLE_N", newValue: "green" })
         }}>Green</button>
         <button onClick={() => {
-          dispatch({ type: "TOGGLE_GRAY", newValue: "gray" })
+          dispatch({ type: "TOGGLE_N", newValue: "gray" })
         }}>Gray</button>
       </div>
 
