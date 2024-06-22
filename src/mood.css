@@ -1,0 +1,21 @@
+.App{
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+ }
+.App.dark{
+  background-color: rgb(20, 20, 20);
+  color: white;
+}
+.App.pink{
+  background-color:pink;
+}
+.App.gray{
+  background-color:gray;
+}
+.App.green{
+  background-color:green;
+}
