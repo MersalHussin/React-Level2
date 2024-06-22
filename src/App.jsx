@@ -5,103 +5,46 @@ import "./App.css";
 import "./mood.css";
 import Toggle from "../components/Toggle";
 import { Link } from "react-router-dom";
+import {useContext } from "react";
+import DataProvider from "./context/Datacontext";
 
-const initialData = {
-  name: "Mersal",
-  age: 20,
-  startCount: 0,
-  theme: "",
-};
-
-
-
-
-const reducer = (state, action) => {
-  switch (action.type) {
-    case "CHANGE_NAME":
-      return { ...state, name: action.newValue };
-    case "CHANGE_AGE":
-      return { ...state, age: action.newValue };
-    case "COUNTER":
-      return { ...state, startCount: action.newValue };
-    case "TOGGLE":
-      return { ...state, theme: action.newValue };
-    case "TOGGLE_N":
-      return { ...state, theme: action.newValue};
-
-
-    default:
-      return state;
-  }
-};
 
 function App() {
-  const [allData, dispatch] = useReducer(reducer, initialData);
-  const [toggle , settoggle] = useState("")
-  const toggleFun = () => {
-    (toggle == "") ? settoggle("dark")  : settoggle("")
-  }
+
+
+  const { name , changeName , age ,changeAge , theme , changeTheme , changeThemeColor , count,Counter} = useContext(DataProvider);
+
   return (
     <>
-    <div className={`App ${allData.theme}`}>
+    <div className={`App ${theme}`}>
     <Link to ='/page2' >To Page 2</Link>
-      <button onClick={()=>{
-        dispatch({ type: "TOGGLE", newValue: allData.theme == "" ? "dark" : "" });
-      }}>Toggle Menu</button>
+      <button onClick={()=>{changeTheme(theme == "" ? "dark" : "")}} >Toggle Menu</button>
 
       <br />
       <br />
       <div className='buttons'>
-        <button  onClick={() =>{
-          dispatch({ type: "TOGGLE_N", newValue: "" })
-        }}>Light</button>
-        <button onClick={() => {
-          dispatch({ type: "TOGGLE_N", newValue: "dark" })
-        }}>Dark</button>
-        <button onClick={() => {
-          dispatch({ type: "TOGGLE_N", newValue: "pink" })
-        }}>Pink</button>
-        <button onClick={() => {
-          dispatch({ type: "TOGGLE_N", newValue: "green" })
-        }}>Green</button>
-        <button onClick={() => {
-          dispatch({ type: "TOGGLE_N", newValue: "gray" })
-        }}>Gray</button>
+        <button onClick={()=>{changeThemeColor("")}}>Light</button>
+        <button  onClick={()=>{changeThemeColor("dark")}} >Dark</button>
+        <button  onClick={()=>{changeThemeColor("pink")}} >Pink</button>
+        <button  onClick={()=>{changeThemeColor("green")}} >Green</button>
+        <button  onClick={()=>{changeThemeColor("gray")}} >Gray</button>
       </div>
-      <br />
-      <Toggle func={toggleFun}/>
+      <br /> 
+      {/* <Toggle func={toggleFun}/> */}
 
       <br />
-      <h1>Hello {allData.name}</h1>
+      <h1>Hello {name} </h1>
       <br />
-      <button
-        onClick={() => {
-          dispatch({ type: "CHANGE_NAME", newValue: "Hussin" });
-        }}
-      >
-        Click Me
-      </button>
+      <button onClick={()=>{changeName("Hussin")}}> Change Name</button>
       
       <br />
       <br />
-      <h1>My Age Is {allData.age}</h1>
+      <h1>My Age Is {age} {theme}</h1>
       <br />
-      <button
-        onClick={() => {
-          dispatch({ type: "CHANGE_AGE", newValue: "21" });
-        }}
-      >
-        Click Me
-      </button>
+      <button onClick={()=> {changeAge(21)}}> Change Age </button>
       <br />
       <br />
-      <button
-        onClick={() => {
-          dispatch({ type: "COUNTER", newValue:(allData.startCount + 1) });
-        }}
-      >
-        Count Is {allData.startCount}{" "}
-      </button>
+      <button onClick={()=>{Counter(count + 1)}}>Count Is {count}</button>
     </div>
     </>
   );
